@@ -1,5 +1,7 @@
 package fr.afcepf.atod26.ws.rest.web.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.apache.log4j.Logger;
 
@@ -45,8 +48,19 @@ public class DeviseRestWSImpl {
 	@GET
 	@Path("/devises")
 	@Produces("application/xml")
-	public List<Devise> getAllDevise() {
-		return deviseDao.getAllDevise();
+	public List<Devise> rechercherDevise(@QueryParam("changeMinimum") Double paramChangeMinimum) {
+		final List<Devise> toutesLesDevise = deviseDao.getAllDevise();
+		final List<Devise> lesDeviseFiltrees = new ArrayList<>();
+		if (paramChangeMinimum != null && !Double.isNaN(paramChangeMinimum)) {
+			for (Devise localDevise : toutesLesDevise) {
+				if (localDevise.getChange() > paramChangeMinimum) {
+					lesDeviseFiltrees.add(localDevise);
+				}
+			}
+			return lesDeviseFiltrees;
+		} else {
+			return toutesLesDevise;
+		}
 	}
 
 }

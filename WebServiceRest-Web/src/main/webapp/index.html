@@ -6,12 +6,16 @@
 </head>
 <body>
 	<h1>Test de web service</h1>
-	<h3>Méthode findDeviseByCode</h3>
+	<h3>Méthode findDeviseByCode GET</h3>
 	<a href="services/rest/deviseService/devise/EUR">Pour les euros </a>
 	<br />
 	<a href="services/rest/deviseService/devise/WSD">Pour les dollars </a>
-	<h3>Méthode getAllDevise</h3>
+	<h3>Méthode getAllDevise GET</h3>
 	<a href="services/rest/deviseService/devises">Pour toutes les
-		devises en xml</a>
+		devises en xml, le paramètre est donc null</a>
+	<br />
+	<a href="services/rest/deviseService/devises?changeMinimum=1.2">Pour
+		toutes les devises en xml, le paramètre est donc 1</a>
+	<h3>Méthode</h3>
 </body>
 </html>
