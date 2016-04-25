@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -77,4 +79,14 @@ public class DeviseRestWSImpl {
 		return resultat;
 	}
 
+	@PUT
+	@Path("/devise")
+	@Consumes("application/json")
+	public Devise mettreAJourDevise(final Devise paramDevise) {
+		log.info("Méthode mettreAJourDevise");
+		final Devise deviseAMettreAJour = new Devise(paramDevise.getCode(), paramDevise.getMonnaie(),
+				paramDevise.getChange());
+		deviseDao.addDevise(deviseAMettreAJour);
+		return deviseAMettreAJour;
+	}
 }
