@@ -1,5 +1,6 @@
 package fr.afcepf.atod26.ws.rest.web.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class DeviseDaoImpl implements IDeviseDao {
 
 	@Override
 	public List<Devise> getAllDevise() {
-		return (List<Devise>) mapDevise.values();
+		return new ArrayList<>(mapDevise.values());
 	}
 
 	@Override
