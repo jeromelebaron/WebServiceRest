@@ -1,7 +1,6 @@
 package fr.afcepf.atod26.ws.rest.web.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,8 +46,8 @@ public class DeviseRestWSImpl {
 	 */
 	@GET
 	@Path("/devises")
-	@Produces("application/xml")
-	public List<Devise> rechercherDevise(@QueryParam("changeMinimum") Double paramChangeMinimum) {
+	public List<Devise> rechercherDevise(@QueryParam("changeMinimum") final Double paramChangeMinimum) {
+		log.info("Méthode rechercherDevise");
 		final List<Devise> toutesLesDevise = deviseDao.getAllDevise();
 		final List<Devise> lesDeviseFiltrees = new ArrayList<>();
 		if (paramChangeMinimum != null && !Double.isNaN(paramChangeMinimum)) {
@@ -61,6 +60,21 @@ public class DeviseRestWSImpl {
 		} else {
 			return toutesLesDevise;
 		}
+	}
+
+	@GET
+	@Path("/convert")
+	@Produces("text/plain")
+	public double convertir(@QueryParam("amount") final Double paramMontant,
+			@QueryParam("src") final String paramSource, @QueryParam("target") final String paramDestination) {
+		Double resultat = 0.0;
+		if (paramMontant != null && !paramMontant.isNaN() && paramSource != null && !paramSource.isEmpty()
+				&& paramDestination != null && !paramDestination.isEmpty()) {
+			final Devise deviseSource = deviseDao.getDeviseByCode(paramSource);
+			final Devise deviseDestination = deviseDao.getDeviseByCode(paramDestination);
+			resultat = paramMontant * deviseSource.getChange() / deviseDestination.getChange();
+		}
+		return resultat;
 	}
 
 }
