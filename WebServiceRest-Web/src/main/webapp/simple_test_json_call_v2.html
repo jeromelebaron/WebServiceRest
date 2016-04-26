@@ -17,7 +17,7 @@
 	  function local_update_selected_devise(){	             
 				//deviseSelected.code = $('#txtCode').val();
 				deviseSelected.monnaie = $('#txtName').val();
-				deviseSelected.change= $('#txtExchangeRate').val();
+				deviseSelected.change= Number($('#txtExchangeRate').val());
 	  }
 	  
       $(function() {

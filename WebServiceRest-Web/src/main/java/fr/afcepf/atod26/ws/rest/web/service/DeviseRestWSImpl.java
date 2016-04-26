@@ -38,7 +38,7 @@ public class DeviseRestWSImpl {
 	@GET
 	@Path("/devise/{code}")
 	public Devise findDeviseByCode(@PathParam(value = "code") final String paramCode) {
-		log.info("Méthode findDeviseByCode");
+		log.debug("Méthode findDeviseByCode");
 		return deviseDao.getDeviseByCode(paramCode);
 	}
 
@@ -49,7 +49,7 @@ public class DeviseRestWSImpl {
 	@GET
 	@Path("/devises")
 	public List<Devise> rechercherDevise(@QueryParam("changeMinimum") final Double paramChangeMinimum) {
-		log.info("Méthode rechercherDevise");
+		log.debug("Méthode rechercherDevise");
 		final List<Devise> toutesLesDevise = deviseDao.getAllDevise();
 		final List<Devise> lesDeviseFiltrees = new ArrayList<>();
 		if (paramChangeMinimum != null && !Double.isNaN(paramChangeMinimum)) {
@@ -69,6 +69,7 @@ public class DeviseRestWSImpl {
 	@Produces("text/plain")
 	public double convertir(@QueryParam("amount") final Double paramMontant,
 			@QueryParam("src") final String paramSource, @QueryParam("target") final String paramDestination) {
+		log.debug("Méthode convertir");
 		Double resultat = 0.0;
 		if (paramMontant != null && !paramMontant.isNaN() && paramSource != null && !paramSource.isEmpty()
 				&& paramDestination != null && !paramDestination.isEmpty()) {
@@ -83,7 +84,7 @@ public class DeviseRestWSImpl {
 	@Path("/devise")
 	@Consumes("application/json")
 	public Devise mettreAJourDevise(final Devise paramDevise) {
-		log.info("Méthode mettreAJourDevise");
+		log.debug("Méthode mettreAJourDevise");
 		final Devise deviseAMettreAJour = new Devise(paramDevise.getCode(), paramDevise.getMonnaie(),
 				paramDevise.getChange());
 		deviseDao.addDevise(deviseAMettreAJour);
