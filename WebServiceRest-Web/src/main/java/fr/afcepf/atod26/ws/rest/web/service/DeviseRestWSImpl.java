@@ -3,7 +3,6 @@ package fr.afcepf.atod26.ws.rest.web.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -16,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import fr.afcepf.atod26.ws.rest.web.api.IDeviseDao;
 import fr.afcepf.atod26.ws.rest.web.entity.Devise;
+import fr.afcepf.atod26.ws.rest.web.impl.DeviseDaoImpl;
 
 @Path("/deviseService")
 @Produces("application/json")
@@ -26,8 +26,8 @@ public class DeviseRestWSImpl {
 	 */
 	private Logger log = Logger.getLogger(DeviseRestWSImpl.class);
 
-	@Inject
-	private IDeviseDao deviseDao;
+	// @Inject
+	private IDeviseDao deviseDao = DeviseDaoImpl.getInstance();
 
 	/**
 	 * Méthode pour récupérer une devise via son {@link Devise@code}. Joignable via l'url :

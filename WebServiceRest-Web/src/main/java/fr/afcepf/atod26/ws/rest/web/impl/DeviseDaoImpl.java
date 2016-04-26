@@ -13,13 +13,22 @@ import fr.afcepf.atod26.ws.rest.web.entity.Devise;
 @Named(value = "deviseDaoImpl")
 public class DeviseDaoImpl implements IDeviseDao {
 
+	private static DeviseDaoImpl uniqueInstance;
+
 	private Map<String, Devise> mapDevise = new HashMap<>();
 
-	public DeviseDaoImpl() {
+	private DeviseDaoImpl() {
 		mapDevise.put("EUR", new Devise("EUR", "Euro", 0.9));
 		mapDevise.put("USD", new Devise("USD", "Dollar", 1.1));
 		mapDevise.put("LIV", new Devise("LIV", "Livre", 1.5));
 		mapDevise.put("JPY", new Devise("JPY", "Yen", 120));
+	}
+
+	public static DeviseDaoImpl getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new DeviseDaoImpl();
+		}
+		return uniqueInstance;
 	}
 
 	@Override
