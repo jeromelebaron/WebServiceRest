@@ -2,8 +2,10 @@ package fr.afcepf.atod26.ws.rest.client;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
@@ -27,5 +29,14 @@ public class ClientMain {
 		logger.info("Résultat réponse : " + resultatReponse);
 		final Double resultat = Double.parseDouble(resultatReponse);
 		logger.info("Résultat de la conversion : " + resultat);
+
+		WebTarget updateTarget = client.target(urlDevise).path("devise");
+		final Response resultatReponseUpdate = updateTarget.request(MediaType.APPLICATION_JSON_TYPE).put(
+				Entity.entity((new Devise("EUR", "Euro", 1.5)), MediaType.APPLICATION_JSON_TYPE));
+		if (resultatReponseUpdate.getStatus() == 200) {
+			logger.info("Update réussi");
+			final Devise deviseMAJ = resultatReponseUpdate.readEntity(Devise.class);
+			logger.info(deviseMAJ.getChange());
+		}
 	}
 }
