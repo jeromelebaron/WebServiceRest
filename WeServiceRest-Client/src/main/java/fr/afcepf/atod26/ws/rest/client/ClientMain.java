@@ -25,8 +25,7 @@ public class ClientMain {
 				.queryParam("src", paramSource).queryParam("target", paramDestination);
 		final String resultatReponse = convertTarget.request(MediaType.TEXT_PLAIN).get().readEntity(String.class);
 		logger.info("Résultat réponse : " + resultatReponse);
-		final Double resultat = Double.parseDouble(convertTarget.request(MediaType.TEXT_PLAIN).get()
-				.readEntity(String.class));
+		final Double resultat = Double.parseDouble(resultatReponse);
 		logger.info("Résultat de la conversion : " + resultat);
 	}
 }
