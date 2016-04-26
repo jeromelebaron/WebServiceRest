@@ -18,7 +18,7 @@ public class ClientMain {
 
 		Client client = ClientBuilder.newClient();
 		final String urlDevise = "http://localhost:8080/WebServiceRest-Web/services/rest/deviseService";
-		final Double paramMontant = 5.0;
+		final Double paramMontant = 50.0;
 		final String paramSource = "EUR";
 		final String paramDestination = "USD";
 		WebTarget convertTarget = client.target(urlDevise).path("convert").queryParam("amount", paramMontant)
