@@ -14,6 +14,7 @@
 	<modules>
 		<module>WeServiceRest-Parent</module>
 		<module>WebServiceRest-Web</module>
+		<module>WeServiceRest-Client</module>
 	</modules>
 
 </project>
