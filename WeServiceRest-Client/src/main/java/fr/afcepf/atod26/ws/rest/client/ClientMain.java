@@ -18,7 +18,7 @@ public class ClientMain {
 
 	public static void main(String[] args) {
 
-		Client client = ClientBuilder.newClient();
+		final Client client = ClientBuilder.newClient();
 		final String urlDevise = "http://localhost:8080/WebServiceRest-Web/services/rest/deviseService";
 		final Double paramMontant = 50.0;
 		final String paramSource = "EUR";
@@ -30,9 +30,9 @@ public class ClientMain {
 		final Double resultat = Double.parseDouble(resultatReponse);
 		logger.info("Résultat de la conversion : " + resultat);
 
-		WebTarget updateTarget = client.target(urlDevise).path("devise");
+		final WebTarget updateTarget = client.target(urlDevise).path("devise");
 		final Response resultatReponseUpdate = updateTarget.request(MediaType.APPLICATION_JSON_TYPE).put(
-				Entity.entity((new Devise("EUR", "Euro", 1.5)), MediaType.APPLICATION_JSON_TYPE));
+				Entity.entity(new Devise("EUR", "Euro", 1.5), MediaType.APPLICATION_JSON_TYPE));
 		if (resultatReponseUpdate.getStatus() == 200) {
 			logger.info("Update réussi");
 			final Devise deviseMAJ = resultatReponseUpdate.readEntity(Devise.class);
