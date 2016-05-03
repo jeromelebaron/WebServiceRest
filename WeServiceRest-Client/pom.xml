@@ -7,8 +7,7 @@
 		<version>0.1</version>
 		<relativePath>../WeServiceRest-Parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>WebServiceRest-Web</artifactId>
-	<packaging>war</packaging>
+	<artifactId>WebServiceRest-Client</artifactId>
 
 	<dependencies>
 		<dependency>
@@ -16,8 +15,12 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
 		</dependency>
 	</dependencies>
 

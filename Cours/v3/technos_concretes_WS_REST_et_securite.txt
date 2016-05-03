@@ -1,0 +1,28 @@
+implementation rapide et efficace WS_REST (coté server):
+=================================
+node_js (avec express + mongoose) avec paramétrages CORS/*
+
+
+
+cote client:
+===========
+appels depuis JQuery ou AngularJs
+
+
+
+securité_WS_REST:
+================
+---> pas de session/cookies mais des "tokens" (stateless) 
+
+cas général/frequent)
+---------------------
+json web token (à générer avec module "jsonwebtoken" de node_js)
+               (à stoker/retransmettre avec localStorage et intercepteur sur $httpProvider d'angularJs)
+
+
+
+cas sophistiqué)
+---------------
+OAuth2 avec "bearer token" (par ex: avec Google, Facebook, Twitter)
+
+
